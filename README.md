@@ -1,0 +1,3 @@
+- git clone git@github.com:nguyennhuhaitrieu/todo-list-react.git
+- npm install 
+- npm start
