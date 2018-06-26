@@ -15,3 +15,11 @@ export const actToggleForm = () => {
 		'type': 'TOGGLE_FORM'
 	}
 }
+
+export const actSort = (orderBy, orderDir) => {
+  return {
+    type: 'SORT_ITEM',
+    orderBy: orderBy,
+    orderDir: orderDir
+  }
+}
