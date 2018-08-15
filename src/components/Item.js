@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { actOpenForm } from './../actions/index';
 
 class Item extends Component {
     constructor(props) {
@@ -32,14 +34,15 @@ class Item extends Component {
     }
 
     handleEdit(item) {
-      this.props.onClickEdit(item);
+      //this.props.onClickEdit(item);
+      this.props.editItem();
     }
 
     render() {
       let item  = this.props.item;
       let levelCustom = item.level;
       let numberList = this.props.indexNumber;
-      console.log(item);
+      //console.log(item);
       return (
         <tr>
           <td className="text-center">{ numberList +1 }</td>
@@ -56,4 +59,13 @@ class Item extends Component {
     }
 }
 
-export default Item;
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    editItem: () => {
+      dispatch(actOpenForm())
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps) (Item);

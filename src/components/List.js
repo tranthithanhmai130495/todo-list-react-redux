@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Item from './Item';
 class List extends Component {
   constructor(props) {
@@ -9,21 +10,25 @@ class List extends Component {
   }
 
   render() {
-    let items = this.props.itemTodo;
-    //console.log(items);
-    let eleItem = items.map((item, index) => {
-      return (
-        <Item onClickDelete ={this.props.onClickDelete} 
-          key={ index } 
-          item = {item} indexNumber = {index}
-          onClickEdit = {this.props.onClickEdit}
-        />
-      )
-    });
+    let items = this.props.itemsTodo;
+    let eleItem = <tr><th colSpan={4}>Không có công việc</th></tr>
+    
+    if (items.length > 0) {
+      eleItem = items.map((item, index) => {
+        return (
+          <Item onClickDelete ={this.props.onClickDelete} 
+            key={ index } 
+            item = {item} indexNumber = {index}
+            onClickEdit = {this.props.onClickEdit}
+          />
+        )
+      });
+    }
+    
     return (
         <div className="panel panel-success" >
           <div className="panel-heading">List Task</div>
-          <table className="table table-hover ">
+          <table className="table table-hover">
             <thead>
               <tr>
                 <th className="text-center">#</th>
@@ -42,4 +47,11 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  //console.log(state);
+  return {
+    itemsTodo: state.items
+  }
+}
+
+export default connect(mapStateToProps, null) (List);

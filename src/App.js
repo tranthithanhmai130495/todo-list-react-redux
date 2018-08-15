@@ -3,9 +3,7 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import store from './redux';
 import { filter, includes, orderBy as funcOrderBy, remove, reject } from 'lodash';
-
 import tasks from './mock/tasks';
 
 const uuidv4 = require('uuid/v4');
@@ -24,7 +22,6 @@ class App extends Component {
     };
 
     this.handleToggleForm   = this.handleToggleForm.bind(this);
-    this.handleCancelSubmit = this.handleCancelSubmit.bind(this);
     this.handleSearch       = this.handleSearch.bind(this);
     this.handleSort         = this.handleSort.bind(this);
     this.handleDelete       = this.handleDelete.bind(this);
@@ -52,12 +49,6 @@ class App extends Component {
     })
   }
 
-  handleCancelSubmit() {
-    this.setState({
-      isShowForm: false
-    })
-  }
-
   handleSearch(value) {
     this.setState({
       strSearch: value
@@ -72,7 +63,7 @@ class App extends Component {
   }
 
   handleDelete(id) {
-    console.log(id);
+    //console.log(id);
     let items = this.state.items;
     remove(items, (item)=> {
       return item.id === id
@@ -127,11 +118,9 @@ class App extends Component {
 
 
   render() {
-    console.log(store);
     let itemOrigin = this.state.items;
     let itemList = [];
     let isShowForm = this.state.isShowForm;
-    let eleForm = null;
     let search = this.state.strSearch;
     let { orderBy, orderDir, itemSelected } = this.state;
 
@@ -153,24 +142,22 @@ class App extends Component {
     });
 
     itemList = funcOrderBy(itemList, [orderBy], [orderDir]);
-
-    if(isShowForm) {
-      eleForm = <Form itemSelected={ itemSelected } onClickSubmit= {this.handleSubmit} onClickCancel= { this.handleCancelSubmit }/>
-    }
     return (
       <div>
         <Title />
         <Control 
           onClickSearchGo = { this.handleSearch}
           onClickAdd = { this.handleToggleForm}
-          isShowForm= { isShowForm }
           orderBy = {orderBy}
           orderDir = {orderDir}
           onClickSort = {this.handleSort}
         />
-        { eleForm }
+
+        <Form 
+          itemSelected={ itemSelected }
+          onClickSubmit= {this.handleSubmit} 
+        />
         <List 
-          itemTodo = {itemList}
           onClickDelete = {this.handleDelete}
           onClickEdit = {this.handleEdit}
         />

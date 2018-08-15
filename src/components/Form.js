@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {actCloseForm } from './../actions/index';
 
 class Form extends Component {
 
@@ -16,29 +18,7 @@ class Form extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     //console.log(this.props.itemSelected);
   }
-
-  componentWillMount() {
-    let item  = this.props.itemSelected;
-    if(item !== null) {
-      this.setState({
-        task_id: item.id,
-        task_name: item.name,
-        task_level: item.level
-      })
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    let item = nextProps.itemSelected;
-    if(nextProps !== null) {
-      this.setState({
-        task_id: item.id,
-        task_name: item.name,
-        task_level: item.level
-      })
-    }
-  }
+  
 
   handleChange(event) {
     const target = event.target;
@@ -63,10 +43,13 @@ class Form extends Component {
   }
 
   handleCancle() {
-    this.props.onClickCancel();
+    this.props.formCancel();
   }
 
   render() {
+    let { isShowForm } = this.props;
+    if (isShowForm === false) return null;
+    
     return (
         <div className="row">
           <div className="col-md-offset-6 col-md-6">
@@ -94,4 +77,19 @@ class Form extends Component {
   }
 }
 
-export default  Form;
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    isShowForm: state.isShowForm
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    formCancel: () => {
+      dispatch(actCloseForm())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Form);

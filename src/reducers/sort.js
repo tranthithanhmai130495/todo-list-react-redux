@@ -1,6 +1,6 @@
 let defaultStore = {orderBy: 'name', orderDir: 'desc'}
   
-let sortReducer = (state = defaultStore, action) => {
+let sort = (state = defaultStore, action) => {
   let {orderBy, orderDir} = action; 
   switch(action.type) {
     case 'SORT_ITEM':
@@ -11,4 +11,4 @@ let sortReducer = (state = defaultStore, action) => {
   }
 }
 
-export default sortReducer;
+export default sort;

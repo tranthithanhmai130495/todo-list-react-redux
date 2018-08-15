@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import isShowFormReducer  from './isShowFormReducer';
-import sortReducer  from './sortReducer';
-  
+import isShowForm  from './isShowForm';
+import sort  from './sort';
+import items  from './items';
+
 let appReducers = combineReducers({
-  isShowForm: isShowFormReducer,
-  sort: sortReducer
+  isShowForm,
+  sort,
+  items
 });
 
 export default appReducers;
