@@ -78,7 +78,6 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     isShowForm: state.isShowForm
   }

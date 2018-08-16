@@ -24,7 +24,7 @@ class Control extends Component {
 
     return (
         <div className="row">
-          <Search onClickGo = {this.props.onClickSearchGo}/>
+          <Search/>
           <Sort 
               orderBy = {orderBy}
               orderDir = {orderDir}

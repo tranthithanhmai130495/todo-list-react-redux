@@ -21,8 +21,6 @@ class App extends Component {
       itemSelected : null
     };
 
-    this.handleToggleForm   = this.handleToggleForm.bind(this);
-    this.handleSearch       = this.handleSearch.bind(this);
     this.handleSort         = this.handleSort.bind(this);
     this.handleDelete       = this.handleDelete.bind(this);
     this.handleSubmit       = this.handleSubmit.bind(this);
@@ -42,19 +40,6 @@ class App extends Component {
     }
   }
 
-  handleToggleForm() {
-    this.setState({
-      isShowForm: !this.state.isShowForm,
-      itemSelected: null
-    })
-  }
-
-  handleSearch(value) {
-    this.setState({
-      strSearch: value
-    })
-  }
-
   handleSort(orderBy, orderDir) {
     this.setState({
       orderBy: orderBy,
@@ -63,14 +48,10 @@ class App extends Component {
   }
 
   handleDelete(id) {
-    //console.log(id);
     let items = this.state.items;
     remove(items, (item)=> {
       return item.id === id
     });
-
-    //console.log(items);
-    //console.log(this.state.items);
 
     this.setState({
       items: items
@@ -82,7 +63,7 @@ class App extends Component {
   handleSubmit(item){
     let { items } = this.state;
     let id = null ;
-    //console.log(item);
+
 
     if(item.id !== '') {
       items = reject(items, {id: item.id});
@@ -109,7 +90,6 @@ class App extends Component {
   }
 
   handleEdit(item) {
-    //console.log(item);
     this.setState({
       itemSelected: item,
       isShowForm   : true,
@@ -118,10 +98,7 @@ class App extends Component {
 
 
   render() {
-    let itemOrigin = this.state.items;
     let itemList = [];
-    let isShowForm = this.state.isShowForm;
-    let search = this.state.strSearch;
     let { orderBy, orderDir, itemSelected } = this.state;
 
     /* viet js thuan
@@ -136,18 +113,13 @@ class App extends Component {
     }
     */
 
-    // su dung thu vien loash 
-    itemList = filter(itemOrigin, (item) =>{
-      return includes(item.name.toLowerCase(), search);
-    });
+    // su dung thu vien loash
 
     itemList = funcOrderBy(itemList, [orderBy], [orderDir]);
     return (
       <div>
         <Title />
-        <Control 
-          onClickSearchGo = { this.handleSearch}
-          onClickAdd = { this.handleToggleForm}
+        <Control
           orderBy = {orderBy}
           orderDir = {orderDir}
           onClickSort = {this.handleSort}
