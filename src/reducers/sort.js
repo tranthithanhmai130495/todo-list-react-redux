@@ -1,4 +1,4 @@
-let defaultStore = {orderBy: 'name', orderDir: 'desc'}
+let defaultStore = {orderBy: 'level', orderDir: 'asc'}
   
 let sort = (state = defaultStore, action) => {
   let {orderBy, orderDir} = action; 

@@ -3,7 +3,7 @@ import Title from './components/Title';
 import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
-import { filter, includes, orderBy as funcOrderBy, remove, reject } from 'lodash';
+import { filter, includes, remove, reject } from 'lodash';
 import tasks from './mock/tasks';
 
 const uuidv4 = require('uuid/v4');
@@ -21,7 +21,6 @@ class App extends Component {
       itemSelected : null
     };
 
-    this.handleSort         = this.handleSort.bind(this);
     this.handleDelete       = this.handleDelete.bind(this);
     this.handleSubmit       = this.handleSubmit.bind(this);
     this.handleEdit         = this.handleEdit.bind(this);
@@ -40,12 +39,6 @@ class App extends Component {
     }
   }
 
-  handleSort(orderBy, orderDir) {
-    this.setState({
-      orderBy: orderBy,
-      orderDir: orderDir
-    })
-  }
 
   handleDelete(id) {
     let items = this.state.items;
@@ -98,31 +91,12 @@ class App extends Component {
 
 
   render() {
-    let itemList = [];
-    let { orderBy, orderDir, itemSelected } = this.state;
-
-    /* viet js thuan
-    if(search.length>0) {
-      itemOrigin.forEach ((item)=>{
-        if(item.name.toLowerCase().indexOf(search) !==-1) {
-          itemList.push(item);
-        }
-      });
-    } else {
-      itemList = itemOrigin;
-    }
-    */
-
-    // su dung thu vien loash
-
-    itemList = funcOrderBy(itemList, [orderBy], [orderDir]);
+    let {itemSelected } = this.state;
+    
     return (
       <div>
         <Title />
         <Control
-          orderBy = {orderBy}
-          orderDir = {orderDir}
-          onClickSort = {this.handleSort}
         />
 
         <Form 

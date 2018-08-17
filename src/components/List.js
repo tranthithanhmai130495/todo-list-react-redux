@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Item from './Item';
-import { filter, includes } from 'lodash';
+import { filter, includes, orderBy as funcOrderBy } from 'lodash';
 
 class List extends Component {
   constructor(props) {
@@ -13,7 +13,11 @@ class List extends Component {
 
   render() {
     let items  = this.props.itemsTodo;
-    let search = this.props.search;
+    let { search, sort } = this.props;
+    let {orderBy, orderDir} = sort;
+    
+    console.log("Sort: ", this.props.sort);
+
     
     //console.log("Search ne:" +search);
 
@@ -23,6 +27,9 @@ class List extends Component {
     items = filter(itemsOrigin, (item) =>{
       return includes(item.name.toLowerCase(), search.toLowerCase());
     });
+
+    //Sort 
+    items = funcOrderBy(items, [orderBy], [orderDir]);
 
     let eleItem = <tr><th colSpan={4}>Không có công việc</th></tr>
     
@@ -63,7 +70,8 @@ class List extends Component {
 const mapStateToProps = state => {
   return {
     itemsTodo: state.items,
-    search: state.search
+    search: state.search,
+    sort: state.sort
   }
 }
 

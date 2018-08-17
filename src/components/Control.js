@@ -20,15 +20,10 @@ class Control extends Component {
   }
   
   render() {
-    let { orderBy, orderDir } = this.props;
-
     return (
         <div className="row">
           <Search/>
           <Sort 
-              orderBy = {orderBy}
-              orderDir = {orderDir}
-              onClickSort = {this.props.onClickSort}
           /> 
           <ToggleForm />
         </div>

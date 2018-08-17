@@ -33,8 +33,6 @@ class Search extends Component {
 
   render() {
     let strSearch = (this.state.strSearch !== "") ? this.state.strSearch : this.props.search;
-    let searchDo = this.props.search;
-    console.log(searchDo);
     return (
         <div className="col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <div className="input-group">
@@ -50,7 +48,6 @@ class Search extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     search: state.search
   }
@@ -68,4 +65,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
