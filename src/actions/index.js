@@ -32,3 +32,11 @@ export const actSearch = (search) => {
 		search
   }
 }
+
+
+export const actDeleteItem = (id) => {
+  return {
+		type: types.DELETE_ITEM,
+		id
+  }
+}

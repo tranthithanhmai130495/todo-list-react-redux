@@ -36,7 +36,7 @@ class List extends Component {
     if (items.length > 0) {
       eleItem = items.map((item, index) => {
         return (
-          <Item onClickDelete ={this.props.onClickDelete} 
+          <Item 
             key={ index } 
             item = {item} indexNumber = {index}
             onClickEdit = {this.props.onClickEdit}

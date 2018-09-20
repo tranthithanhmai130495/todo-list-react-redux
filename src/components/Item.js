@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actOpenForm } from './../actions/index';
+import { actOpenForm, actDeleteItem } from './../actions/index';
 
 class Item extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class Item extends Component {
     }
 
     handleDelete(id){
-      this.props.onClickDelete(id);
+      this.props.deleteItem(id);
     }
 
     handleEdit(item) {
@@ -64,6 +64,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     editItem: () => {
       dispatch(actOpenForm())
+    },
+    deleteItem: (id) => {
+      dispatch(actDeleteItem(id))
     }
   }
 }

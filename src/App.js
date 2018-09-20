@@ -5,6 +5,7 @@ import Form from './components/Form';
 import List from './components/List';
 import { filter, includes, remove, reject } from 'lodash';
 import tasks from './mock/tasks';
+import * as  config  from './constants/config.js';
 
 const uuidv4 = require('uuid/v4');
 
@@ -20,15 +21,14 @@ class App extends Component {
       orderDir     : 'asc',
       itemSelected : null
     };
-
-    this.handleDelete       = this.handleDelete.bind(this);
+    
     this.handleSubmit       = this.handleSubmit.bind(this);
     this.handleEdit         = this.handleEdit.bind(this);
   }
 
 
   componentWillMount() {
-    let items = JSON.parse(localStorage.getItem('task',items));
+    let items = JSON.parse(localStorage.getItem(config.ITEMS_FROM_LOCAL_STOGARE,items));
     if(items === null ) {
       items= localStorage.setItem('task','null');
       items= localStorage.getItem('task');
@@ -39,19 +39,6 @@ class App extends Component {
     }
   }
 
-
-  handleDelete(id) {
-    let items = this.state.items;
-    remove(items, (item)=> {
-      return item.id === id
-    });
-
-    this.setState({
-      items: items
-    })
-
-    localStorage.setItem('task',JSON.stringify(items));
-  }
 
   handleSubmit(item){
     let { items } = this.state;
@@ -104,7 +91,6 @@ class App extends Component {
           onClickSubmit= {this.handleSubmit} 
         />
         <List 
-          onClickDelete = {this.handleDelete}
           onClickEdit = {this.handleEdit}
         />
       </div>
