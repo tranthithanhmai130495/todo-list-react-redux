@@ -10,22 +10,15 @@ import * as  config  from './constants/config.js';
 const uuidv4 = require('uuid/v4');
 
 class App extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      items        : [],
-      isShowForm   : false,
-      strSearch    : '',
-      orderBy      : 'name',
-      orderDir     : 'asc',
-      itemSelected : null
-    };
-    
-    this.handleSubmit       = this.handleSubmit.bind(this);
-    this.handleEdit         = this.handleEdit.bind(this);
-  }
-
+  state = {
+    items        : [],
+    isShowForm   : false,
+    strSearch    : '',
+    orderBy      : 'name',
+    orderDir     : 'asc',
+    itemSelected : null
+  };
 
   componentWillMount() {
     let items = JSON.parse(localStorage.getItem(config.ITEMS_FROM_LOCAL_STOGARE,items));
@@ -40,7 +33,7 @@ class App extends Component {
   }
 
 
-  handleSubmit(item){
+  /*handleSubmit(item){
     let { items } = this.state;
     let id = null ;
 
@@ -68,6 +61,7 @@ class App extends Component {
 
     localStorage.setItem('task', JSON.stringify(items));
   }
+  */
 
   handleEdit(item) {
     this.setState({
@@ -78,21 +72,14 @@ class App extends Component {
 
 
   render() {
-    let {itemSelected } = this.state;
-    
     return (
       <div>
         <Title />
         <Control
         />
 
-        <Form 
-          itemSelected={ itemSelected }
-          onClickSubmit= {this.handleSubmit} 
-        />
-        <List 
-          onClickEdit = {this.handleEdit}
-        />
+        <Form />
+        <List />
       </div>
     );
   }

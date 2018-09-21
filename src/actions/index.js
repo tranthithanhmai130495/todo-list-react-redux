@@ -18,6 +18,13 @@ export const actToggleForm = () => {
 	}
 }
 
+export const actSubmitForm = (item) => {
+	return {
+		type: types.SUBMIT_FORM,
+		item
+	}
+}
+
 export const actSort = (orderBy, orderDir) => {
   return {
     type: types.SORT_ITEM,

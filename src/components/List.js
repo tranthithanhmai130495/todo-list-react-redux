@@ -39,7 +39,6 @@ class List extends Component {
           <Item 
             key={ index } 
             item = {item} indexNumber = {index}
-            onClickEdit = {this.props.onClickEdit}
           />
         )
       });
@@ -68,6 +67,7 @@ class List extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     itemsTodo: state.items,
     search: state.search,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actOpenForm, actDeleteItem } from './../actions/index';
 
+
 class Item extends Component {
     constructor(props) {
       super(props);

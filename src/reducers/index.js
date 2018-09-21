@@ -8,7 +8,7 @@ let appReducers = combineReducers({
   isShowForm,
   sort,
   items,
-  search
+  search,
 });
 
 export default appReducers;
