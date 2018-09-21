@@ -1,6 +1,6 @@
 import * as  types from './../constants/ActionTypes.js';
 import * as  config  from './../constants/config.js';
-import { remove } from 'lodash';
+import { remove, reject } from 'lodash';
 
 const uuidv4 = require('uuid/v4');
 
@@ -24,7 +24,14 @@ const items = (state = defaultState, action) => {
     case types.SUBMIT_FORM:
         id = null; 
         let {item} = action;
-        id = uuidv4();
+        if(item.id !== '') {
+          state = reject(state, {id: item.id});
+          id=  item.id;
+          
+        } else {
+          id = uuidv4();
+        }
+        
         state.push({
           id : id,
           name: item.name,
@@ -32,7 +39,7 @@ const items = (state = defaultState, action) => {
         })
         localStorage.setItem(config.ITEMS_FROM_LOCAL_STOGARE, JSON.stringify(state));
         return [...state];
-        
+
     default: 
       return state;
   }

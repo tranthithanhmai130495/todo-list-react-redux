@@ -16,9 +16,6 @@ class List extends Component {
     let { search, sort } = this.props;
     let {orderBy, orderDir} = sort;
     
-    console.log("Sort: ", this.props.sort);
-
-    
     //console.log("Search ne:" +search);
 
     let itemsOrigin = (items !=null) ? [...items]: [];
@@ -67,7 +64,6 @@ class List extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     itemsTodo: state.items,
     search: state.search,
